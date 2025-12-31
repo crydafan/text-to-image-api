@@ -35,7 +35,7 @@ const app = new Elysia()
 
       return {
         success: true,
-        message: "Sucessfully generated image",
+        message: "Successfully generated image",
         image_url: url,
       };
       // Dummy implementation for text-to-image generation
