@@ -1,17 +1,42 @@
+import { s3, write } from "bun";
 import { Elysia, t } from "elysia";
+import OpenAI from "openai";
 
 const app = new Elysia()
   .post(
     "/api/v1/text-to-image",
-    ({ body }) => {
+    async ({ body }) => {
       const { prompt, size } = body;
-      console.log(
-        `Generating image for prompt: "${prompt}" with size: ${size}`
-      );
+
+      //console.log(
+      // `Generating image for prompt: "${prompt}" with size: ${size}`
+      //);
+
+      const openai = new OpenAI();
+
+      const result = await openai.images.generate({
+        prompt,
+        size,
+        response_format: "b64_json",
+      });
+
+      console.log("Image generation result:", result);
+
+      const dataBase64 = result.data?.[0].b64_json;
+      const buffer = Buffer.from(dataBase64!, "base64");
+
+      const metadata = s3.file(`image_${Date.now()}.png`);
+      await write(metadata, buffer);
+
+      const url = metadata.presign({
+        acl: "public-read",
+        expiresIn: 60 * 60, // 1 hour
+      });
+
       return {
         success: true,
-        message: "Image generation request received",
-        image_url: "https://placeholder.example.com/image.png",
+        message: "Sucessfully generated image",
+        image_url: url,
       };
       // Dummy implementation for text-to-image generation
     },

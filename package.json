@@ -8,7 +8,8 @@
     "start": "./build/text-to-image-api"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "openai": "^6.15.0"
   },
   "devDependencies": {
     "bun-types": "latest"
