@@ -8,6 +8,11 @@ const app = new Elysia()
       console.log(
         `Generating image for prompt: "${prompt}" with size: ${size}`
       );
+      return {
+        success: true,
+        message: "Image generation request received",
+        image_url: "https://placeholder.example.com/image.png",
+      };
       // Dummy implementation for text-to-image generation
     },
     {
