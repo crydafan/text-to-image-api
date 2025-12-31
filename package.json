@@ -3,7 +3,9 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build --compile --minify --sourcemap ./src/index.ts --outfile ./build/text-to-image-api",
+    "start": "./build/text-to-image-api"
   },
   "dependencies": {
     "elysia": "latest"
