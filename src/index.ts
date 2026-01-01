@@ -15,6 +15,7 @@ const app = new Elysia()
       const openai = new OpenAI();
 
       const result = await openai.images.generate({
+        model: "dall-e-3",
         prompt,
         size,
         response_format: "b64_json",
