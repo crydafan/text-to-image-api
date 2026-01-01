@@ -3,6 +3,7 @@ import { Elysia, t } from "elysia";
 import OpenAI from "openai";
 
 const app = new Elysia()
+  .get("/api/v1/health", () => ({ success: true, message: "Ok" }))
   .post(
     "/api/v1/text-to-image",
     async ({ body }) => {
@@ -31,7 +32,9 @@ const app = new Elysia()
       return {
         success: true,
         message: "Successfully generated image",
-        image_url: url,
+        data: {
+          image_url: url,
+        },
       };
     },
     {
