@@ -8,10 +8,6 @@ const app = new Elysia()
     async ({ body }) => {
       const { prompt, size } = body;
 
-      //console.log(
-      // `Generating image for prompt: "${prompt}" with size: ${size}`
-      //);
-
       const openai = new OpenAI();
 
       const result = await openai.images.generate({
@@ -20,8 +16,6 @@ const app = new Elysia()
         size,
         response_format: "b64_json",
       });
-
-      console.log("Image generation result:", result);
 
       const dataBase64 = result.data?.[0].b64_json;
       const buffer = Buffer.from(dataBase64!, "base64");
@@ -39,7 +33,6 @@ const app = new Elysia()
         message: "Successfully generated image",
         image_url: url,
       };
-      // Dummy implementation for text-to-image generation
     },
     {
       body: t.Object({
