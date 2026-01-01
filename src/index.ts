@@ -42,11 +42,7 @@ const app = new Elysia()
         {
           body: t.Object({
             prompt: t.String(),
-            size: t.Union([
-              t.Literal("256x256"),
-              t.Literal("512x512"),
-              t.Literal("1024x1024"),
-            ]),
+            size: t.Union([t.Literal("1024x1024")]),
           }),
         }
       )
