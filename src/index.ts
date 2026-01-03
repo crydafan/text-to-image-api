@@ -28,7 +28,7 @@ const app = new Elysia()
 
           const url = metadata.presign({
             acl: "public-read",
-            expiresIn: 60 * 60, // 1 hour
+            expiresIn: 24 * 60 * 60, // 24 hours
           });
 
           return {
